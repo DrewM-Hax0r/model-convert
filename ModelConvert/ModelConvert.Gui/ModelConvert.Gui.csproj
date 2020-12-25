@@ -1,9 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelConvert.Abstractions\ModelConvert.Abstractions.csproj" />
+    <ProjectReference Include="..\ModelConvert.Assimp\ModelConvert.Assimp.csproj" />
+    <ProjectReference Include="..\ModelConvert.DependencyResolution\ModelConvert.DependencyResolution.csproj" />
+    <ProjectReference Include="..\ModelConvert.IO\ModelConvert.IO.csproj" />
+  </ItemGroup>
 
 </Project>

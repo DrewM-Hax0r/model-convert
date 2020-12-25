@@ -1,7 +1,7 @@
 ﻿
 namespace ModelConvert.Gui.Forms
 {
-    partial class Main
+    partial class ModelConversion
     {
         /// <summary>
         /// Required designer variable.
@@ -63,6 +63,7 @@ namespace ModelConvert.Gui.Forms
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // lblBottomDivider
             // 

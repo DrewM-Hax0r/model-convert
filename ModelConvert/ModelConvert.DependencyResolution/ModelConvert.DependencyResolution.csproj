@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelConvert.Abstractions\ModelConvert.Abstractions.csproj" />
+    <ProjectReference Include="..\ModelConvert.Assimp\ModelConvert.Assimp.csproj" />
+    <ProjectReference Include="..\ModelConvert.Core\ModelConvert.Core.csproj" />
+  </ItemGroup>
+
+</Project>
