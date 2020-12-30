@@ -10,6 +10,9 @@ namespace ModelConvert.Core.Tests
     [TestClass]
     public class TestModelFormatService
     {
+
+        #region - GetSupportedImportFormats -
+
         [TestMethod]
         public void GetSupportedImportFormats_NullPluginFactory()
         {
@@ -68,6 +71,71 @@ namespace ModelConvert.Core.Tests
             ModelFormat.Assert(results[1], fileExtension: ".b", description: "Bad File");
             ModelFormat.Assert(results[2], fileExtension: ".c", description: "Good File");
         }
+
+        #endregion
+
+        #region - GetSupportedExportFormats -
+
+        [TestMethod]
+        public void GetSupportedExportFormats_NullPluginFactory()
+        {
+            var service = GetService(plugins: null);
+            var results = service.GetSupportedExportFormats();
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void GetSupportedExportFormats_EmptyPluginFactory()
+        {
+            var service = GetService(plugins: new List<IPluginFactory>());
+            var results = service.GetSupportedExportFormats();
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void GetSupportedExportFormats_FromPluginFactory()
+        {
+            var plugins = new List<IPluginFactory>()
+            {
+                new PluginFactory(supportedExportFormats: new List<IModelFormat>()
+                {
+                    new ModelFormat() { FileExtension = ".a", Description = "A File" }
+                })
+            };
+
+            var service = GetService(plugins: plugins);
+            var results = service.GetSupportedExportFormats();
+
+            Assert.AreEqual(1, results.Count);
+            ModelFormat.Assert(results[0], fileExtension: ".a", description: "A File");
+        }
+
+        [TestMethod]
+        public void GetSupportedExportFormats_Sorting()
+        {
+            var plugins = new List<IPluginFactory>()
+            {
+                new PluginFactory(supportedExportFormats: new List<IModelFormat>()
+                {
+                    new ModelFormat() { FileExtension = ".a", Description = "Some File" },
+                    new ModelFormat() { FileExtension = ".c", Description = "Good File" }
+                }),
+                new PluginFactory(supportedExportFormats: new List<IModelFormat>()
+                {
+                    new ModelFormat() { FileExtension = ".b", Description = "Bad File" }
+                })
+            };
+
+            var service = GetService(plugins: plugins);
+            var results = service.GetSupportedExportFormats();
+
+            Assert.AreEqual(3, results.Count);
+            ModelFormat.Assert(results[0], fileExtension: ".a", description: "Some File");
+            ModelFormat.Assert(results[1], fileExtension: ".b", description: "Bad File");
+            ModelFormat.Assert(results[2], fileExtension: ".c", description: "Good File");
+        }
+
+        #endregion
 
         private static IModelFormatService GetService(IEnumerable<IPluginFactory> plugins = null)
         {

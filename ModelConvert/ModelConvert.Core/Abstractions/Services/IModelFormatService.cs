@@ -6,5 +6,6 @@ namespace ModelConvert.Core.Abstractions.Services
     public interface IModelFormatService
     {
         List<IModelFormat> GetSupportedImportFormats();
+        List<IModelFormat> GetSupportedExportFormats();
     }
 }
