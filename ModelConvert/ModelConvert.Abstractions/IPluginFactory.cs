@@ -11,5 +11,10 @@ namespace ModelConvert.Abstractions
         /// The model formats this plugin is capable of importing.
         /// </returns>
         List<IModelFormat> GetSupportedImportFormats();
+
+        /// <returns>
+        /// The model formats this plugin is capable of exporting.
+        /// </returns>
+        List<IModelFormat> GetSupportedExportFormats();
     }
 }

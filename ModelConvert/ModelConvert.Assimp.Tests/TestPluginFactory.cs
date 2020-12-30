@@ -29,7 +29,7 @@ namespace ModelConvert.Assimp.Tests
             AssertModelFormat(supportedFormats[6], "Additive Manufacturing Format File", ".amf");
             AssertModelFormat(supportedFormats[7], "ASE File", ".ase");
             AssertModelFormat(supportedFormats[8], "ASK File", ".ask");
-            AssertModelFormat(supportedFormats[9], "Allegorithmic Substance Painter Scene File", ".assbin");
+            AssertModelFormat(supportedFormats[9], "Assimp Binary File", ".assbin");
             AssertModelFormat(supportedFormats[10], "Blitz3D File", ".b3d");
             AssertModelFormat(supportedFormats[11], "Blender File", ".blend");
             AssertModelFormat(supportedFormats[12], "Biovision Hierarchy Character Animation File", ".bvh");
@@ -86,6 +86,28 @@ namespace ModelConvert.Assimp.Tests
             AssertModelFormat(supportedFormats[63], "XGL File", ".xgl");
             AssertModelFormat(supportedFormats[64], "XML File", ".xml");
             AssertModelFormat(supportedFormats[65], "ZGL File", ".zgl");
+        }
+
+        [TestMethod]
+        public void SupportedExportFormats()
+        {
+            var supportedFormats = this.PluginFactory.GetSupportedExportFormats();
+
+            Assert.AreEqual(14, supportedFormats.Count);
+            AssertModelFormat(supportedFormats[0], "COLLADA (COLLAborative Design Activity) File", ".dae");
+            AssertModelFormat(supportedFormats[1], "DirectX (Binnary/ASCII) File", ".x");
+            AssertModelFormat(supportedFormats[2], "STEP File", ".stp");
+            AssertModelFormat(supportedFormats[3], "Wavefront OBJ File", ".obj");
+            AssertModelFormat(supportedFormats[4], "Standard Triangle Language File", ".stl");
+            AssertModelFormat(supportedFormats[5], "Polygon Format File", ".ply");
+            AssertModelFormat(supportedFormats[6], "Autodesk 3DS Max File", ".3ds");
+            AssertModelFormat(supportedFormats[7], "ASCII Graphics Language Transmission Format File", ".gltf");
+            AssertModelFormat(supportedFormats[8], "Binary Graphics Language Transmission Format File", ".glb");
+            AssertModelFormat(supportedFormats[9], "ASCII Graphics Language Transmission Format v2.0 File", ".gltf2");
+            AssertModelFormat(supportedFormats[10], "Assimp Binary File", ".assbin");
+            AssertModelFormat(supportedFormats[11], "Assimp XML File", ".assxml");
+            AssertModelFormat(supportedFormats[12], "Extensible 3D Graphics File", ".x3d");
+            AssertModelFormat(supportedFormats[13], "3D Manufacturing Format File", ".3mf");
         }
 
         private static void AssertModelFormat(IModelFormat actualFormat, string expectedDescription, string expectedFileExtension)

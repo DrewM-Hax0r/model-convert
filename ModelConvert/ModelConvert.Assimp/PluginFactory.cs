@@ -15,6 +15,18 @@ namespace ModelConvert.Assimp
             ).ToList();
         }
 
+        List<IModelFormat> IPluginFactory.GetSupportedExportFormats()
+        {
+            var context = new AssimpContext();
+            return context.GetSupportedExportFormats().Select<ExportFormatDescription, (string FileDescription, string FileExtension)>(format => {
+                var extension = "." + format.FileExtension;
+                return (GetFileDescription(extension), extension);
+            }).Distinct()
+            .Select<(string FileDescription, string FileExtension), IModelFormat>(x =>
+                new ModelFormat(x.FileDescription, x.FileExtension)
+            ).ToList();
+        }
+
         private static string GetFileDescription(string fileExtension)
         {
             switch(fileExtension)
@@ -24,7 +36,8 @@ namespace ModelConvert.Assimp
                 case ".ac":
                 case ".ac3d": return "AC3D File";
                 case ".amf": return "Additive Manufacturing Format File";
-                case ".assbin": return "Allegorithmic Substance Painter Scene File";
+                case ".assbin": return "Assimp Binary File";
+                case ".assxml": return "Assimp XML File";
                 case ".b3d": return "Blitz3D File";
                 case ".blend": return "Blender File";
                 case ".bvh": return "Biovision Hierarchy Character Animation File";
@@ -36,6 +49,7 @@ namespace ModelConvert.Assimp
                 case ".fbx": return "Autodesk FilmBox File";
                 case ".glb": return "Binary Graphics Language Transmission Format File";
                 case ".gltf": return "ASCII Graphics Language Transmission Format File";
+                case ".gltf2": return "ASCII Graphics Language Transmission Format v2.0 File";
                 case ".ifc": return "Industry Foundation Classes File";
                 case ".ifczip": return "Compressed Industry Foundation Classes File";
                 case ".irr":
